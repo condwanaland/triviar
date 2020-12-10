@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^LICENSE\.md$
-trivia_questions.csv
+^trivia_questions\.csv$
+.github

@@ -1,8 +1,11 @@
 library(shiny)
+library(DT)
+library(dplyr)
 library(triviar)
 
-#questions <- load(system.file("data", "all_questions.rda", package = "triviar"))
-questions <- data("all_questions.rda")
+csv_questions <- read.csv(
+    system.file("data", "all_questions.csv", package = "triviar")
+)
 
 # Define UI
 ui <- fluidPage(
@@ -12,15 +15,31 @@ ui <- fluidPage(
 
     sidebarLayout(
         sidebarPanel(
+            checkboxGroupInput(
+                "selectedCategories",
+                "Select Categories",
+                choices = unique(csv_questions$category),
+                selected = "animals"
+            )
         ),
 
         mainPanel(
+            DT::DTOutput("questions")
         )
     )
 )
 
 # Define server logic
 server <- function(input, output) {
+
+    filter_questions <- reactive({
+        csv_questions %>%
+        dplyr::filter(category %in% input$selectedCategories)
+    })
+
+    output$questions <- DT::renderDT({
+        filter_questions()
+    })
 
 
 }
