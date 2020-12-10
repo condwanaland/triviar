@@ -1,4 +1,8 @@
 library(shiny)
+library(triviar)
+
+#questions <- load(system.file("data", "all_questions.rda", package = "triviar"))
+questions <- data("all_questions.rda")
 
 # Define UI
 ui <- fluidPage(
@@ -11,7 +15,6 @@ ui <- fluidPage(
         ),
 
         mainPanel(
-           plotOutput()
         )
     )
 )
