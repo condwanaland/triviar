@@ -10,7 +10,6 @@ ui <- fluidPage(
         sidebarPanel(
         ),
 
-
         mainPanel(
            plotOutput()
         )
