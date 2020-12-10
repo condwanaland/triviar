@@ -6,7 +6,7 @@ library(triviar)
 csv_questions <- get_questions()
 
 # Define UI
-ui <- navbarPage(title = "Trivial Pursuit",
+ui <- navbarPage(title = "Trivial Pursuit", id = "navpage",
                  tabPanel("Setup",
                           sidebarLayout(
                               sidebarPanel(
@@ -29,7 +29,7 @@ ui <- navbarPage(title = "Trivial Pursuit",
 )
 
 # Define server logic
-server <- function(input, output) {
+server <- function(input, output, session) {
 
     filter_questions <- reactive({
         csv_questions %>%
@@ -50,7 +50,9 @@ server <- function(input, output) {
               "selected")
               })
 
-
+    observeEvent(input$startGame, {
+        updateTabsetPanel(session, "navpage", "Game")
+    })
 }
 
 # Run the application
