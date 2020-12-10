@@ -11,6 +11,6 @@
 #' triviar::write_as_csv("trivia_questions")
 write_as_csv <- function(filename){
   filename <- tools::file_path_sans_ext(filename)
-  dat <- data("all_questions")
-  write.csv(dat, paste0(filename, ".csv"))
+  dat <- utils::data("all_questions")
+  utils::write.csv(dat, paste0(filename, ".csv"))
 }

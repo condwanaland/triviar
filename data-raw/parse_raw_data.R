@@ -27,4 +27,3 @@ all_questions <- do.call(rbind, questions_lists)
 
 # Write data
 usethis::use_data(all_questions, overwrite = TRUE)
-usethis::use_data(all_questions, overwrite = TRUE)
