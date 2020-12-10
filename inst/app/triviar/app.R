@@ -21,12 +21,14 @@ ui <- fluidPage(
                 "selectedCategories",
                 "Select Categories",
                 choices = unique(csv_questions$category),
-                selected = "animals"
+                selected = create_random_choices()
             )
         ),
 
         mainPanel(
-            DT::DTOutput("questions")
+            textOutput("categoryMessage"),
+            #DT::DTOutput("questions")
+            actionButton("startGame", "Start Game")
         )
     )
 )
@@ -39,9 +41,19 @@ server <- function(input, output) {
         dplyr::filter(category %in% input$selectedCategories)
     })
 
-    output$questions <- DT::renderDT({
-        filter_questions()
+    # output$questions <- DT::renderDT({
+    #     filter_questions()
+    # })
+
+    numCategories <- reactive({
+        length(input$selectedCategories)
     })
+
+    output$categoryMessage <- renderText({
+        paste("Please select a total of 6 categories. You currently have",
+              numCategories(),
+              "selected")
+              })
 
 
 }
