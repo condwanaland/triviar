@@ -10,27 +10,26 @@ library(triviar)
 csv_questions <- get_questions()
 
 # Define UI
-ui <- fluidPage(
+ui <- navbarPage(title = "Trivial Pursuit",
+                 tabPanel("Setup",
+                          sidebarLayout(
+                              sidebarPanel(
+                                  checkboxGroupInput(
+                                      "selectedCategories",
+                                      "Select Categories",
+                                      choices = unique(csv_questions$category),
+                                      selected = create_random_choices()
+                                  )
+                              ),
 
-    # Application title
-    titlePanel(""),
-
-    sidebarLayout(
-        sidebarPanel(
-            checkboxGroupInput(
-                "selectedCategories",
-                "Select Categories",
-                choices = unique(csv_questions$category),
-                selected = create_random_choices()
-            )
-        ),
-
-        mainPanel(
-            textOutput("categoryMessage"),
-            #DT::DTOutput("questions")
-            actionButton("startGame", "Start Game")
-        )
-    )
+                              mainPanel(
+                                  textOutput("categoryMessage"),
+                                  #DT::DTOutput("questions")
+                                  actionButton("startGame", "Start Game")
+                              )
+                          )
+                         ),
+                 tabPanel("Game")
 )
 
 # Define server logic
