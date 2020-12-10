@@ -3,10 +3,6 @@ library(DT)
 library(dplyr)
 library(triviar)
 
-# csv_questions <- read.csv(
-#     system.file("data", "all_questions.csv", package = "triviar")
-# )
-
 csv_questions <- get_questions()
 
 # Define UI
